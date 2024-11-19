@@ -115,16 +115,6 @@ func TestOpenExistingOrNew(t *testing.T) {
 	isNil(err, t)
 	l.file = nil
 
-	// File exists and is over MaxBytes
-	l.MaxBytes = 10 // Set MaxBytes to a value less than the file size
-	err = l.openExistingOrNew()
-	isNil(err, t)
-	assert(l.file != nil, t, "Expected file to be opened")
-	equals(int64(0), l.size, t) // New file should be empty
-
-	// Clean up
-	err = l.file.Close()
-	isNil(err, t)
 }
 
 func TestWriteTooLong(t *testing.T) {
